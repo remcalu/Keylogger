@@ -5,13 +5,16 @@
 #include <Winuser.h>
 
 int main() {
+    int i;
+    int inLetters[26] = {0x41, 0x42, 0x43};
+    char outLetters[26][3] = {"a\0", "b\0", "c\0"};
     while (1) {
-        if (GetAsyncKeyState(VK_LSHIFT) & (0x8000 != 0)) {
-            //printf("%d and %d and %d\n", (GetAsyncKeyState(VK_LSHIFT)), (0x8000 != 0), (GetAsyncKeyState(VK_LSHIFT) & (0x8000 != 0)));
-            printf("L SHIFT\n");
-        } else if (GetAsyncKeyState(VK_RSHIFT) & (0x8000 != 0)) { 
-            //printf("%d and %d and %d\n", (GetAsyncKeyState(VK_RSHIFT)), (0x8000 != 0), (GetAsyncKeyState(VK_RSHIFT) & (0x8000 != 0)));
-            printf("R SHIFT\n");
+        for (i = 0; i < 3; i++) {
+            int check = GetAsyncKeyState(inLetters[i]);
+            if (check & (0x8000 != 0)) {
+                printf("'%s' ", outLetters[i]);
+            }
         }
+        Sleep(20);
     }
 }

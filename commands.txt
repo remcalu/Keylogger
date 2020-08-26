@@ -1,5 +1,0 @@
-mingw32-make main
-
-gcc -ansi -Wall main.c -o main
-
-./main

